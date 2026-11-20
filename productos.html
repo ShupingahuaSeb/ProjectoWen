@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Repuestos | TechFix Pro</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html" class="active">Productos</a></li>
+          <li><a href="citas.html" class="btn-nav">Agendar Cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ENCABEZADO DEL CATÁLOGO -->
+  <section class="page-banner">
+    <div class="container">
+      <span class="hero-badge">● Repuestos Originales • Instalación Disponible</span>
+      <h1>Hardware, Componentes y Accesorios</h1>
+      <p>Selecciona los componentes que necesitas para tu equipo o agrégalos a tu lista de cotización para instalarlos en tu próxima cita.</p>
+    </div>
+  </section>
+
+  <!-- CONTROLES DE FILTRO Y BÚSQUEDA -->
+  <section class="catalog-section container">
+    <div class="catalog-controls">
+      <div class="filter-buttons" id="filtros-categoria">
+        <button class="filter-btn active" data-categoria="todos">Todos</button>
+        <button class="filter-btn" data-categoria="almacenamiento">Almacenamiento SSD</button>
+        <button class="filter-btn" data-categoria="memoria">Memoria RAM</button>
+        <button class="filter-btn" data-categoria="refrigeracion">Refrigeración</button>
+        <button class="filter-btn" data-categoria="accesorios">Cargadores y Cables</button>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="buscador-productos" placeholder="🔍 Buscar SSD, RAM, pasta térmica..." />
+      </div>
+    </div>
+
+    <!-- LAYOUT: CUADRÍCULA DE PRODUCTOS + PANEL DE COTIZACIÓN -->
+    <div class="catalog-layout">
+      <!-- Aquí JavaScript inyectará las tarjetas -->
+      <div class="products-grid" id="grid-productos"></div>
+
+      <!-- PANEL LATERAL DE COTIZACIÓN / CARRITO -->
+      <aside class="quote-panel">
+        <div class="quote-header">
+          <h3>🧾 Tu Cotización</h3>
+          <span class="quote-count" id="contador-items">0 ítems</span>
+        </div>
+        
+        <div class="quote-list" id="lista-cotizacion">
+          <p class="empty-msg">Aún no has agregado productos. Haz clic en "+ Agregar" en cualquier componente.</p>
+        </div>
+
+        <div class="quote-footer">
+          <div class="quote-total">
+            <span>Total Estimado:</span>
+            <strong id="total-cotizacion">S/ 0.00</strong>
+          </div>
+          <button id="btn-enviar-cita" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" disabled>
+            Continuar a Agendar Cita →
+          </button>
+          <button id="btn-vaciar" class="btn-clear" style="display: none;">Vaciar lista</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo" style="font-size: 1.2rem;">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </div>
+      <p>&copy; 2026 TechFix Pro • Proyecto Universitario de Desarrollo Web</p>
+    </div>
+  </footer>
+
+  <!-- Script del catálogo -->
+  <script src="js/productos.js"></script>
+</body>
+</html>

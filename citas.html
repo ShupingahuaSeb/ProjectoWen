@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendar Cita o Domicilio | TechFix Pro</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="citas.html" class="btn-nav active">Agendar Cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ENCABEZADO -->
+  <section class="page-banner">
+    <div class="container">
+      <span class="hero-badge">● Atención en Laboratorio o Unidad Móvil</span>
+      <h1>Reserva tu Servicio Técnico</h1>
+      <p>Programa tu visita en nuestro taller o marca tu ubicación exacta en el mapa para enviar un técnico a tu domicilio.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PRINCIPAL DE RESERVA -->
+  <section class="booking-section container">
+    <div class="booking-grid">
+      
+      <!-- FORMULARIO DE CITA -->
+      <div class="booking-panel">
+        <form id="form-cita">
+          
+          <!-- SELECTOR DE MODALIDAD -->
+          <div class="form-group">
+            <label class="group-title">1. Elige la modalidad de atención</label>
+            <div class="modality-selector">
+              <label class="modality-card active" id="opt-taller">
+                <input type="radio" name="modalidad" value="En Taller" checked />
+                <span class="mod-icon">🏢</span>
+                <div>
+                  <strong>En Nuestro Taller</strong>
+                  <small>Av. Universitaria 4520, Comas</small>
+                </div>
+              </label>
+
+              <label class="modality-card" id="opt-domicilio">
+                <input type="radio" name="modalidad" value="A Domicilio" />
+                <span class="mod-icon">🚐</span>
+                <div>
+                  <strong>Servicio a Domicilio</strong>
+                  <small>Marca tu casa en el mapa</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- BLOQUE DINÁMICO: MAPA A DOMICILIO (Oculto por defecto hasta elegir Domicilio) -->
+          <div id="bloque-domicilio" class="domicilio-box" style="display: none;">
+            <div class="domicilio-header">
+              <label class="group-title" style="margin: 0;">📍 Ubicación exacta para la visita</label>
+              <button type="button" id="btn-gps" class="btn-gps">🎯 Usar mi GPS actual</button>
+            </div>
+            <p class="help-text">Haz clic en el mapa o arrastra el marcador azul hasta la puerta de tu domicilio.</p>
+            
+            <div class="map-box" style="margin-bottom: 1rem;">
+              <div class="map-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="map-title">Selector de Coordenadas • Cobertura Lima</span>
+              </div>
+              <div id="mapa-domicilio"></div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="coordenadas">Coordenadas GPS</label>
+                <input type="text" id="coordenadas" name="coordenadas" readonly value="-11.95920, -77.06280" />
+              </div>
+              <div class="form-group">
+                <label for="referencia">Dirección / Referencia *</label>
+                <input type="text" id="referencia" name="referencia" placeholder="Ej. Jr. Los Pinos 240, frente al parque" />
+              </div>
+            </div>
+          </div>
+
+          <!-- DATOS DEL CLIENTE Y EQUIPO -->
+          <label class="group-title">2. Datos del Cliente y del Equipo</label>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cliente-nombre">Nombre Completo *</label>
+              <input type="text" id="cliente-nombre" required placeholder="Ej. Carlos Mendoza" />
+            </div>
+            <div class="form-group">
+              <label for="cliente-telefono">Teléfono / WhatsApp *</label>
+              <input type="tel" id="cliente-telefono" required placeholder="Ej. 987 654 321" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tipo-equipo">Tipo de Equipo *</label>
+              <select id="tipo-equipo" required>
+                <option value="Laptop">Laptop / Notebook</option>
+                <option value="PC de Escritorio">PC de Escritorio / Gamer</option>
+                <option value="All-in-One">Computadora All-in-One</option>
+                <option value="Impresora">Impresora / Periférico</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="servicio-tipo">Servicio Requerido *</label>
+              <select id="servicio-tipo" required>
+                <option value="Mantenimiento Preventivo">Mantenimiento Preventivo + Pasta Térmica</option>
+                <option value="Instalación de Repuestos">Instalación de Repuestos / Upgrade</option>
+                <option value="Reparación de Hardware">Reparación de Falla / No enciende</option>
+                <option value="Formateo y Software">Formateo, Windows y Optimización</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha-cita">Fecha Preferida *</label>
+              <input type="date" id="fecha-cita" required />
+            </div>
+            <div class="form-group">
+              <label for="hora-cita">Turno Horario *</label>
+              <select id="hora-cita" required>
+                <option value="Mañana (9:00 AM - 12:00 PM)">Mañana (9:00 AM - 12:00 PM)</option>
+                <option value="Tarde (2:00 PM - 5:00 PM)">Tarde (2:00 PM - 5:00 PM)</option>
+                <option value="Noche (5:00 PM - 7:00 PM)">Noche (5:00 PM - 7:00 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="problema-detalle">Descripción del problema o modelo del equipo</label>
+            <textarea id="problema-detalle" rows="3" placeholder="Ej. Lenovo IdeaPad 3, se calienta mucho al abrir programas y hace ruido el ventilador..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem;">
+            ✅ Confirmar y Generar Orden de Servicio
+          </button>
+        </form>
+      </div>
+
+      <!-- COLUMNA DERECHA: RESUMEN DE REPUESTOS + ÓRDENES REGISTRADAS -->
+      <div class="booking-sidebar">
+        <!-- REPUESTOS VINCULADOS DESDE PRODUCTOS.HTML -->
+        <div class="summary-card">
+          <h3>🛒 Repuestos Adjuntos</h3>
+          <div id="resumen-repuestos">
+            <p class="empty-msg">No hay repuestos seleccionados en el catálogo.</p>
+          </div>
+          <a href="productos.html" class="link-add-more">+ Agregar o editar productos del catálogo</a>
+        </div>
+
+        <!-- HISTORIAL DE ÓRDENES AGENDADAS (DEMO EN VIVO) -->
+        <div class="summary-card" style="margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0;">📋 Órdenes Agendadas</h3>
+            <span class="quote-count" id="total-ordenes">0</span>
+          </div>
+          <div id="lista-ordenes" class="orders-list">
+            <p class="empty-msg">Aún no has registrado citas en esta sesión.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo" style="font-size: 1.2rem;">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </div>
+      <p>&copy; 2026 TechFix Pro • Proyecto Universitario de Desarrollo Web</p>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS y Script de Citas -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/mapa-citas.js"></script>
+</body>
+</html>

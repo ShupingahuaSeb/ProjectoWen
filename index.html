@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechFix Pro | Laboratorio & Servicio Técnico</title>
+  
+  <!-- Google Fonts: Space Grotesk (Títulos) + Plus Jakarta Sans (Cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS para el mapa del local -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Nuestros estilos -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="citas.html" class="btn-nav">Agendar Cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL (HERO CON PATRÓN TECH) -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <span class="hero-badge">● Diagnóstico en 24h • Garantía Certificada</span>
+      <h1>Ingeniería y Soporte Técnico para tus Equipos</h1>
+      <p>Mantenimiento de precisión, microsoldadura, actualización de hardware y asistencia técnica en laboratorio o directo en tu domicilio.</p>
+      <div class="hero-buttons">
+        <a href="citas.html" class="btn btn-primary">Agendar Cita / Domicilio</a>
+        <a href="productos.html" class="btn btn-secondary">Explorar Catálogo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS DESTACADOS -->
+  <section class="services container">
+    <div class="section-header">
+      <span class="section-tag">ESPECIALIDADES</span>
+      <h2 class="section-title">Soluciones de Alto Rendimiento</h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon">❄️</div>
+          <span class="card-badge">Más solicitado</span>
+        </div>
+        <h3>Mantenimiento Térmico</h3>
+        <p>Limpieza ultrasónica interna, desinfección de ventiladores y aplicación de pasta térmica de alta conductividad.</p>
+        <div class="card-footer">
+          <span>Desde S/ 50.00</span>
+          <a href="citas.html">Reservar →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon">🔧</div>
+          <span class="card-badge">Hardware</span>
+        </div>
+        <h3>Reparación y Upgrades</h3>
+        <p>Instalación de unidades NVMe SSD, expansión de memoria RAM, cambio de pantallas, teclados y baterías.</p>
+        <div class="card-footer">
+          <span>Diagnóstico gratis</span>
+          <a href="citas.html">Reservar →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon">🛡️</div>
+          <span class="card-badge">Software</span>
+        </div>
+        <h3>Optimización & Sistemas</h3>
+        <p>Instalación limpia de Windows/Linux, respaldo seguro de información, eliminación de malware y ajuste de BIOS.</p>
+        <div class="card-footer">
+          <span>Entrega el mismo día</span>
+          <a href="citas.html">Reservar →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN DEL LOCAL CON PANEL MEJORADO -->
+  <section class="location-section">
+    <div class="container">
+      <div class="location-wrapper">
+        <div class="location-info">
+          <span class="section-tag">UBICACIÓN CENTRAL</span>
+          <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Visita Nuestro Laboratorio</h2>
+          
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <div>
+                <strong>Dirección del Local</strong>
+                <p>Av. Universitaria 4520, Comas, Lima</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🕒</span>
+              <div>
+                <strong>Horario de Atención</strong>
+                <p>Lunes a Sábado: 9:00 AM – 7:00 PM</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">💬</span>
+              <div>
+                <strong>Contacto Directo</strong>
+                <p>+51 999 888 777 • soporte@techfixpro.pe</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>¿Prefieres no salir de casa?</strong> Nuestro equipo móvil acude a tu domicilio con herramientas portátiles de diagnóstico.
+          </div>
+          
+          <a href="citas.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1.25rem;">Solicitar Técnico a Domicilio</a>
+        </div>
+
+        <div class="map-box">
+          <div class="map-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="map-title">Mapa Interactivo • Sede Principal</span>
+          </div>
+          <div id="mapa-local"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo" style="font-size: 1.2rem;">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </div>
+      <p>&copy; 2026 TechFix Pro • Proyecto Universitario de Desarrollo Web</p>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS y Script del mapa del local -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const ubicacionLocal = [-11.9592, -77.0628];
+    const mapaLocal = L.map('mapa-local').setView(ubicacionLocal, 15);
+
+    // Capa visual de CartoDB (gratuita, rápida, sin bloqueos locales y con diseño moderno)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(mapaLocal);
+
+    L.marker(ubicacionLocal)
+      .addTo(mapaLocal)
+      .bindPopup('<b>TechFix Pro - Laboratorio</b><br>Av. Universitaria 4520')
+      .openPopup();
+  </script>
+</body>
+</html>
