@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrativo | TechFix Pro</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
+          <li><a href="citas.html" class="btn-nav">Agendar Cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PANTALLA 1: VERIFICACIÓN DE LOGIN (Se oculta al iniciar sesión) -->
+  <section id="login-view" class="login-section container">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <h2>Acceso Administrativo</h2>
+      <p>Ingresa tus credenciales de técnico o administrador para gestionar citas e inventario.</p>
+
+      <form id="form-login">
+        <div class="form-group">
+          <label for="admin-user">Usuario</label>
+          <input type="text" id="admin-user" required placeholder="Ingresa tu usuario" />
+        </div>
+        <div class="form-group">
+          <label for="admin-pass">Contraseña</label>
+          <input type="password" id="admin-pass" required placeholder="••••••••" />
+        </div>
+        <p id="login-error" class="error-msg" style="display: none;">Usuario o contraseña incorrectos.</p>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          Iniciar Sesión →
+        </button>
+      </form>
+
+      <div class="demo-credentials">
+        <strong>Credenciales de prueba:</strong><br>
+        Usuario: <code>admin</code> • Contraseña: <code>techfix2026</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTALLA 2: DASHBOARD DEL ADMINISTRADOR (Oculto hasta validar) -->
+  <section id="dashboard-view" class="dashboard-section container" style="display: none;">
+    <div class="dash-header">
+      <div>
+        <span class="section-tag">PANEL DE CONTROL</span>
+        <h1 style="font-size: 2rem; color: var(--primary);">Gestión de Taller e Inventario</h1>
+      </div>
+      <button id="btn-logout" class="btn-logout">Cerrar Sesión 🚪</button>
+    </div>
+
+    <!-- TARJETAS DE RESUMEN (KPIs) -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Servicios Solicitados</span>
+        <strong class="kpi-value" id="kpi-citas">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Visitas a Domicilio</span>
+        <strong class="kpi-value" id="kpi-domicilios" style="color: #059669;">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Productos con Stock Bajo (&le;3)</span>
+        <strong class="kpi-value" id="kpi-bajo-stock" style="color: #dc2626;">0</strong>
+      </div>
+    </div>
+
+    <!-- MÓDULO A: SERVICIOS SOLICITADOS -->
+    <div class="admin-panel" style="margin-bottom: 2.5rem;">
+      <div class="panel-top">
+        <h2>📋 Servicios Solicitados por Clientes</h2>
+      </div>
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Cliente / Contacto</th>
+              <th>Equipo y Servicio</th>
+              <th>Modalidad y Ubicación</th>
+              <th>Fecha / Turno</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-servicios">
+            <!-- Se llena con JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MÓDULO B: CONTROL Y REPOSICIÓN DE STOCK -->
+    <div class="admin-panel">
+      <div class="panel-top">
+        <h2>📦 Control de Inventario y Reposición de Stock</h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Los cambios se reflejan al instante en la tienda</span>
+      </div>
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Precio Unit.</th>
+              <th>Stock Actual</th>
+              <th>Estado</th>
+              <th>Reponer Stock</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-stock">
+            <!-- Se llena con JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo" style="font-size: 1.2rem;">
+        <span class="logo-icon">⚡</span>TechFix<span class="highlight">Pro</span>
+      </div>
+      <p>&copy; 2026 TechFix Pro • Proyecto Universitario de Desarrollo Web</p>
+    </div>
+  </footer>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
