@@ -23,15 +23,16 @@ fechaInput.value = hoy;
 function iniciarMapaDomicilio() {
   if (mapaDomicilio) return; // Ya está creado
 
-  mapaDomicilio = L.map("mapa-domicilio").setView(coordsIniciales, 14);
+  mapaDomicilio = L.map("mapa-domicilio").setView(coordsIniciales, 15);
 
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
-    attribution: "Tiles &copy; Esri &mdash; OpenStreetMap contributors"
+  // Capa en español (hl=es) sin bloqueos locales ni API key
+  L.tileLayer("https://mt1.google.com/vt/lyrs=m&hl=es&x={x}&y={y}&z={z}", {
+    attribution: "&copy; Google Maps • Cobertura Lima",
+    maxZoom: 20
   }).addTo(mapaDomicilio);
 
   marcadorDomicilio = L.marker(coordsIniciales, { draggable: true }).addTo(mapaDomicilio);
   marcadorDomicilio.bindPopup("<b>Ubicación de visita</b><br>Arrástrame a tu domicilio").openPopup();
-
   // Actualizar input al arrastrar el marcador
   marcadorDomicilio.on("dragend", () => {
     const pos = marcadorDomicilio.getLatLng();

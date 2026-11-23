@@ -159,21 +159,20 @@
   </footer>
 
   <!-- Leaflet JS y Script del mapa del local -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const ubicacionLocal = [-11.9592, -77.0628];
-    const mapaLocal = L.map('mapa-local').setView(ubicacionLocal, 15);
+    const mapaLocal = L.map('mapa-local').setView(ubicacionLocal, 16);
 
-    // Capa visual de CartoDB (gratuita, rápida, sin bloqueos locales y con diseño moderno)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      subdomains: 'abcd',
+    // Capa de Google Maps en español (hl=es) - Carga rápido, sin API key y con todos los lugares locales
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&hl=es&x={x}&y={y}&z={z}', {
+      attribution: '&copy; Google Maps • TechFix Pro',
       maxZoom: 20
     }).addTo(mapaLocal);
 
     L.marker(ubicacionLocal)
       .addTo(mapaLocal)
-      .bindPopup('<b>TechFix Pro - Laboratorio</b><br>Av. Universitaria 4520')
+      .bindPopup('<b>TechFix Pro - Laboratorio</b><br>Av. Universitaria 4520, Comas')
       .openPopup();
   </script>
 </body>
