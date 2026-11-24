@@ -1,7 +1,7 @@
 // VARIABLES GLOBALES
 let mapaDomicilio = null;
 let marcadorDomicilio = null;
-const coordsIniciales = [-11.9592, -77.0628]; // Lima Norte por defecto
+const coordsIniciales = [-11.9592, -77.0628];
 
 // ELEMENTOS DEL DOM
 const radiosModalidad = document.querySelectorAll('input[name="modalidad"]');
@@ -14,18 +14,16 @@ const btnGps = document.getElementById("btn-gps");
 const formCita = document.getElementById("form-cita");
 const fechaInput = document.getElementById("fecha-cita");
 
-// Establecer fecha mínima como hoy
 const hoy = new Date().toISOString().split("T")[0];
 fechaInput.min = hoy;
 fechaInput.value = hoy;
 
-// INICIALIZAR MAPA DE DOMICILIO (USANDO ESRI PARA EVITAR BLOQUEOS)
+// INICIALIZAR MAPA DE DOMICILIO EN ESPAÑOL
 function iniciarMapaDomicilio() {
-  if (mapaDomicilio) return; // Ya está creado
+  if (mapaDomicilio) return;
 
   mapaDomicilio = L.map("mapa-domicilio").setView(coordsIniciales, 15);
 
-  // Capa en español (hl=es) sin bloqueos locales ni API key
   L.tileLayer("https://mt1.google.com/vt/lyrs=m&hl=es&x={x}&y={y}&z={z}", {
     attribution: "&copy; Google Maps • Cobertura Lima",
     maxZoom: 20
@@ -33,13 +31,12 @@ function iniciarMapaDomicilio() {
 
   marcadorDomicilio = L.marker(coordsIniciales, { draggable: true }).addTo(mapaDomicilio);
   marcadorDomicilio.bindPopup("<b>Ubicación de visita</b><br>Arrástrame a tu domicilio").openPopup();
-  // Actualizar input al arrastrar el marcador
+
   marcadorDomicilio.on("dragend", () => {
     const pos = marcadorDomicilio.getLatLng();
     actualizarCoordenadas(pos.lat, pos.lng);
   });
 
-  // Actualizar input al hacer clic en cualquier parte del mapa
   mapaDomicilio.on("click", (e) => {
     marcadorDomicilio.setLatLng(e.latlng);
     actualizarCoordenadas(e.latlng.lat, e.latlng.lng);
@@ -60,7 +57,6 @@ radiosModalidad.forEach((radio) => {
       inputReferencia.required = true;
 
       iniciarMapaDomicilio();
-      // Recalcular tamaño del mapa tras hacerse visible
       setTimeout(() => {
         mapaDomicilio.invalidateSize();
       }, 150);
@@ -147,7 +143,8 @@ formCita.addEventListener("submit", (e) => {
     fecha: fechaInput.value,
     hora: document.getElementById("hora-cita").value,
     detalle: document.getElementById("problema-detalle").value,
-    repuestos: repuestos
+    repuestos: repuestos,
+    estado: "Pendiente"
   };
 
   ordenesGuardadas.unshift(nuevaOrden);
@@ -156,42 +153,16 @@ formCita.addEventListener("submit", (e) => {
   // Limpiar carrito tras confirmar cita
   localStorage.removeItem("techfix_cotizacion");
   cargarRepuestosAdjuntos();
-  renderizarOrdenes();
   formCita.reset();
   fechaInput.value = hoy;
 
-  alert(`¡Orden ${nuevaOrden.codigo} registrada con éxito! Revisa el panel derecho "Órdenes Agendadas".`);
+  // Volver visualmente a la opción "En Taller"
+  optTaller.classList.add("active");
+  optDomicilio.classList.remove("active");
+  bloqueDomicilio.style.display = "none";
+
+  alert(`✅ ¡Solicitud registrada con éxito!\n\nTu código de orden es: ${nuevaOrden.codigo}\nNuestro equipo técnico te contactará a la brevedad.`);
 });
-
-// MOSTRAR HISTORIAL DE ÓRDENES AGENDADAS
-function renderizarOrdenes() {
-  const ordenes = JSON.parse(localStorage.getItem("techfix_ordenes")) || [];
-  const lista = document.getElementById("lista-ordenes");
-  const contador = document.getElementById("total-ordenes");
-
-  contador.textContent = ordenes.length;
-
-  if (ordenes.length === 0) {
-    lista.innerHTML = `<p class="empty-msg">Aún no has registrado citas en esta sesión.</p>`;
-    return;
-  }
-
-  lista.innerHTML = ordenes.map(ord => `
-    <div class="order-ticket ${ord.modalidad === "A Domicilio" ? "domicilio" : ""}">
-      <div class="ticket-top">
-        <span class="ticket-code">${ord.codigo} • ${ord.equipo}</span>
-        <span class="ticket-badge">${ord.modalidad}</span>
-      </div>
-      <p><strong>Cliente:</strong> ${ord.cliente} (${ord.telefono})</p>
-      <p><strong>Servicio:</strong> ${ord.servicio}</p>
-      <p><strong>Cita:</strong> ${ord.fecha} | ${ord.hora}</p>
-      <p><strong>Lugar:</strong> ${ord.referencia}</p>
-      ${ord.modalidad === "A Domicilio" ? `<span class="ticket-coords">GPS: ${ord.coordenadas}</span>` : ""}
-      ${ord.repuestos.length > 0 ? `<p style="margin-top:0.4rem; color:#2563eb;"><strong>Repuestos (${ord.repuestos.length}):</strong> ${ord.repuestos.map(r => r.nombre).join(", ")}</p>` : ""}
-    </div>
-  `).join("");
-}
 
 // INICIALIZAR AL CARGAR
 cargarRepuestosAdjuntos();
-renderizarOrdenes();

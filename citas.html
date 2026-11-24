@@ -165,9 +165,8 @@
         </form>
       </div>
 
-      <!-- COLUMNA DERECHA: RESUMEN DE REPUESTOS + ÓRDENES REGISTRADAS -->
+      <!-- COLUMNA DERECHA: SOLO RESUMEN DE REPUESTOS Y AVISO AL CLIENTE -->
       <div class="booking-sidebar">
-        <!-- REPUESTOS VINCULADOS DESDE PRODUCTOS.HTML -->
         <div class="summary-card">
           <h3>🛒 Repuestos Adjuntos</h3>
           <div id="resumen-repuestos">
@@ -176,15 +175,11 @@
           <a href="productos.html" class="link-add-more">+ Agregar o editar productos del catálogo</a>
         </div>
 
-        <!-- HISTORIAL DE ÓRDENES AGENDADAS (DEMO EN VIVO) -->
-        <div class="summary-card" style="margin-top: 1.5rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h3 style="margin: 0;">📋 Órdenes Agendadas</h3>
-            <span class="quote-count" id="total-ordenes">0</span>
-          </div>
-          <div id="lista-ordenes" class="orders-list">
-            <p class="empty-msg">Aún no has registrado citas en esta sesión.</p>
-          </div>
+        <div class="summary-card" style="margin-top: 1.5rem; background: #f8fafc;">
+          <h3>🔒 Reserva Confidencial</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">
+            Al confirmar tu solicitud, se generará un código único de atención. Un técnico asignado revisará tu orden y se comunicará contigo por WhatsApp o teléfono.
+          </p>
         </div>
       </div>
 
